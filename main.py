@@ -24,13 +24,13 @@ def main():
     global COUNTER
     print "\r"
     print "*********************************************"
-    print "voctohtml v0.1 \t autor: Černý Jan \t 2015"
+    print "voctohtml v0.2 \t autor: Černý Jan \t 2015"
     print "*********************************************"
     print "\r"
     #check the parameters
     if len(argv) < 2:
-        print "program musi byt spusten s parametry !!"
-        print "pro nápovědu zadejte -help"
+        print "application have to run with some parameters !!"
+        print "for help put -help"
         print "app down"
         exit()
 
@@ -38,24 +38,9 @@ def main():
     if argv[1] == "-help":
         print "HELP"
         print "===="
-        print "přiklad spuštění -> python main.py -N ukazka01 10000 urls.txt -S -H -C -ST -F -dg"
+        print "example of use: python main.py example_db.txt"
+        print "example_db.txt >> file with vocabularies"
         print "\n"
-        print "-N"
-        print "-R"
-        print "-P"
-        print "-E"
-        print "\n"
-        print "ukazka01 >> nazev vytvorene DB"
-        print "\n"
-        print "urls.txt >> soubor s URL adresami ze kterých se začíná pracovat"
-        print "\n"
-        print "volitelne prepinace pro zjistovani informaci o webu, minimalne jeden zvolte (-dg se do toho nepocita)"
-        print "-S >> server"
-        print "-H >> značkovací jazyk"
-        print "-C >> CSS"
-        print "-ST >> skriptovací jazyk"
-        print "-F >> JavaScript framework"
-        print "-dg >> vypis na konzoli"
         exit()
 
     #location
@@ -169,7 +154,7 @@ def main():
             else:
                 handler_to_file.write(doc_end+"\n")
                 handler_to_file.write("<tr><td>" + line[0] + "</td><td class='center'>" + gap + "</td><td>" + line[1] + "</td></tr>" + "\n")
-                COUNTER = 16
+                COUNTER = 10
         fh.close() 
     except IOError:
         pass
@@ -192,8 +177,8 @@ if __name__ == '__main__':
     #sleep for 1s
     sleep(1)
 
-    FILE_NAME = "slovicka-en"
-    COUNTER = 17
+    FILE_NAME = "vocabularies-in-html"
+    COUNTER = 10
     
     #main thread
     main()
