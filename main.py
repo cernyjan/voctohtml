@@ -139,9 +139,9 @@ def main():
         <table border="1">
     
         <tr class="header">
-        <td>EN</td>
+        <td>original</td>
         <td class="center">&nbsp;</td>
-        <td>CZ</td>
+        <td>translated</td>
         </tr>
         """
         
@@ -154,14 +154,14 @@ def main():
             if line[(len(line)-2):] == "##":
                 doc = r"""</i></td></tr>
                 <tr class="header">
-                    <td>EN</td>
+                    <td>original</td>
                     <td class="center">&nbsp;</td>
-                    <td>CZ</td>
+                    <td>translated</td>
                 </tr>
                 """
                 doc = doc.decode("utf-8");
                 handler_to_file.write(line[:-2] + doc + "\n")
-                pass    
+                continue    
             line = line.split("#")
             if COUNTER > 0:
                 handler_to_file.write("<tr><td>" + line[0] + "</td><td class='center'>" + gap + "</td><td>" + line[1] + "</td></tr>" + "\n")
