@@ -1,4 +1,31 @@
-The 1st set of vocabulary##
-bride#nevěsta
-groom#ženich
-have a meal#najez se
+TOP 30 nejpoužívanějších anglických slov##
+the#(určitý člen)
+of#ze, o (2. pád)
+and#a
+to#do
+a#(neurčitý člen)
+in#v
+that#ten, ta, to, tamten
+is#je
+was#byl
+he#on
+for#pro
+it#to
+with#s
+as#jak, jako, protože
+on#na
+be#být
+at#v
+by#u
+i#já
+this#toto
+not#ne (zápor)
+but#ale
+from#z
+had#měl
+which#který
+have#mít
+or#nebo
+an#(neurčitý člen)
+said#řekl
+are#jsi
