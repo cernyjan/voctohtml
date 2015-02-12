@@ -4,7 +4,7 @@
 name: voctohtml -- vocabulary HTML generator in Python 
 autor: Černý Jan
 email: cerny.jan@hotmail.com
-version: 0.1
+version: 0.2
 """
 #import - own packages
 #import - system packages
@@ -22,6 +22,7 @@ def main():
     """
     global FILE_NAME
     global COUNTER
+    def_counter = COUNTER
     print "\r"
     print "*********************************************"
     print "voctohtml v0.2 \t autor: Černý Jan \t 2015"
@@ -30,24 +31,31 @@ def main():
     #check the parameters
     if len(argv) < 2:
         print "application have to run with some parameters !!"
-        print "for help put -help"
-        print "app down"
+        print "for help put -help parameter"
+        print "\n"
         exit()
 
     #help
     if argv[1] == "-help":
         print "HELP"
         print "===="
-        print "example of use: python main.py example_db.txt"
+        print "example of use: python main.py example_db.txt 7"
         print "example_db.txt >> file with vocabularies"
+        print "7 >> quantity of vocabularies per table (optional parameter)"
         print "\n"
         exit()
 
     #location
     try:
         file_of_vocabularies = codecs.open(argv[1], "r", "utf-8")
+        line = file_of_vocabularies.readline().strip()
+        line = line.encode('utf-8')
+        line = line.decode("utf-8")
+        if line[(len(line)-2):] == "##":
+            FILE_NAME = line[:-2]
     except IOError:
         print "wrong input file"
+        print "\n"
         exit()
     
     doc = r"""
@@ -107,13 +115,19 @@ def main():
 
     doc = doc.decode("utf-8");
     handler_to_file.write(doc)
+
+    #set user counter
+    if len(argv) == 3:
+        if argv[2].isdigit():
+            def_counter = int(argv[2])
+            COUNTER = def_counter
+
         
     try:
-        fh = codecs.open(argv[1], "r", "utf-8")
+        file_of_vocabularies = codecs.open(argv[1], "r", "utf-8")
         gap = "&nbsp; – &nbsp;"
         gap = gap.decode("utf-8")
-        doc_end = r"""
-        </table>
+        doc_end = r"""</table>
         <br />
         <br />
         <br />
@@ -131,19 +145,19 @@ def main():
         """
         
         while 1:
-            line = fh.readline().strip()
+            line = file_of_vocabularies.readline().strip()
             line = line.encode('utf-8')
             line = line.decode("utf-8")
             if not line:
                 break
+            #name of the set of vocabularies
             if line[(len(line)-2):] == "##":
                 doc = r"""</i></td></tr>
                 <tr class="header">
                     <td>original</td>
                     <td class="center">&nbsp;</td>
                     <td>translated</td>
-                </tr>
-                """
+                </tr>"""
                 doc = doc.decode("utf-8");
                 handler_to_file.write(line[:-2] + doc + "\n")
                 continue    
@@ -154,8 +168,8 @@ def main():
             else:
                 handler_to_file.write(doc_end+"\n")
                 handler_to_file.write("<tr><td>" + line[0] + "</td><td class='center'>" + gap + "</td><td>" + line[1] + "</td></tr>" + "\n")
-                COUNTER = 10
-        fh.close() 
+                COUNTER = (def_counter - 1)
+        file_of_vocabularies.close() 
     except IOError:
         pass
 
@@ -178,7 +192,7 @@ if __name__ == '__main__':
     sleep(1)
 
     FILE_NAME = "vocabularies-in-html"
-    COUNTER = 10
+    COUNTER = 100
     
     #main thread
     main()
