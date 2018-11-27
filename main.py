@@ -8,6 +8,7 @@ version: 0.2
 """
 #import - own packages
 #import - system packages
+import platform
 import ctypes
 from time import sleep
 from sys import argv
@@ -184,12 +185,13 @@ def main():
 
 
 if __name__ == '__main__':
-    #change name of running process
-    LIBC = ctypes.CDLL('libc.so.6')
-    PROC_NAME = "voctohtml"
-    LIBC.prctl(15, '%s\0' %PROC_NAME, 0, 0, 0)
-    #sleep for 1s
-    sleep(1)
+    #changing the name of a running process for a better overview of the means utilized
+    if platform.system() == "Linux":
+        LIBC = ctypes.CDLL('libc.so.6')
+        PROC_NAME = "voctohtml"
+        LIBC.prctl(15, '%s\0' %PROC_NAME, 0, 0, 0)
+        #a delay of 1s
+        sleep(1)
 
     FILE_NAME = "vocabularies-in-html"
     COUNTER = 100
