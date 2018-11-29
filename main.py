@@ -26,7 +26,7 @@ def main():
     def_counter = COUNTER
     print "\r"
     print "*********************************************"
-    print "voctohtml v0.2 \t autor: Černý Jan \t 2015"
+    print unicode("voctohtml v0.2 \t autor: Černý Jan \t 2015", 'utf-8')
     print "*********************************************"
     print "\r"
     #check the parameters
